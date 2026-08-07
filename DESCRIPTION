@@ -1,0 +1,43 @@
+Package: lsda
+Type: Package
+Title: Course Materials for Longitudinal and Spatial Data Analysis
+Version: 0.1.0
+Authors@R: person(
+    given = "Olatunji",
+    family = "Johnson",
+    role = c("aut", "cre"),
+    email = "olatunji.johnson@manchester.ac.uk")
+Description: Datasets, teaching helper functions, interactive Shiny
+    applications and 'learnr' tutorials supporting MATH48132 and MATH68132
+    Longitudinal and Spatial Data Analysis at the University of Manchester.
+    Installing this package provides every dataset and dependency used across
+    the eleven teaching weeks in a single step, so that tutorial code runs
+    without students having to locate and read data files themselves.
+License: CC BY-NC-SA 4.0
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 4.1)
+Imports:
+    graphics,
+    grDevices,
+    stats
+Suggests:
+    CARBayes,
+    geepack,
+    ggplot2,
+    gstat,
+    knitr,
+    learnr,
+    MASS,
+    nlme,
+    rmarkdown,
+    sf,
+    shiny,
+    spatstat,
+    spdep,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.3.1
+URL: https://github.com/olatunjijohnson/lsda
+BugReports: https://github.com/olatunjijohnson/lsda/issues
