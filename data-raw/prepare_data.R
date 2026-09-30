@@ -105,4 +105,43 @@ if (requireNamespace("sf", quietly = TRUE)) {
 tef <- utils::read.table(file.path(raw, "tef.txt"), header = TRUE)
 save_it(tef, "tef")
 
+# ---- 10. gm_no2, gm_grid ---------------------------------------------------
+# Nitrogen dioxide at 25 monitoring stations across Greater Manchester, the
+# running geostatistical example in weeks 7 and 8, with the covariates the
+# lecture model uses: distance to the nearest major road, elevation and
+# population. gm_grid is the matching 4996-point prediction grid.
+# Coordinates are British National Grid (EPSG:27700), as in the raw files.
+if (requireNamespace("sf", quietly = TRUE)) {
+  p <- utils::read.csv(file.path(raw, "pollution_manchester_new.csv"))
+  p <- p[, c("Station", "NO2", "PM10", "PM25", "elevation", "road", "pop",
+             "UTMX", "UTMY")]
+  names(p)[names(p) == "Station"] <- "station"
+  gm_no2 <- sf::st_as_sf(p, coords = c("UTMX", "UTMY"), crs = 27700)
+  save_it(gm_no2, "gm_no2")
+
+  g <- utils::read.csv(file.path(raw, "GM_pred_grid_predictor.csv"))
+  gm_grid <- sf::st_as_sf(g, coords = c("UTMX", "UTMY"), crs = 27700)
+  save_it(gm_grid, "gm_grid")
+} else {
+  message("  sf not available -- skipping gm_no2 and gm_grid")
+}
+
+# ---- 11. nw_obesity --------------------------------------------------------
+# Childhood obesity and income deprivation in the 33 local authority districts
+# of North West England, the areal example in weeks 9 and 10. The shapefile's
+# column names are truncated to 7 characters, so they are spelled out here.
+if (requireNamespace("sf", quietly = TRUE)) {
+  o <- sf::st_read(file.path(raw, "North_West_England_Obesity_Deprivation.shp"),
+                   quiet = TRUE)
+  keep <- c(LAD23CD = "lad_code", LAD23NM = "lad_name", num_obs = "num_obese",
+            totl_sm = "total_sampled", prop_bs = "prop_obese",
+            IDACI_s = "idaci_score", IDACI_R = "idaci_rank")
+  o <- o[, c(names(keep), attr(o, "sf_column"))]
+  names(o)[match(names(keep), names(o))] <- unname(keep)
+  nw_obesity <- o
+  save_it(nw_obesity, "nw_obesity")
+} else {
+  message("  sf not available -- skipping nw_obesity")
+}
+
 message("done.")

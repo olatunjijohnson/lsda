@@ -23,6 +23,13 @@ north-west Spain, with a co-located PM10 measurement. The running example for
 the geostatistical weeks: variogram estimation in week 7, model fitting and
 kriging in week 8.
 }
+\section{Name clash}{
+ \pkg{RiskMap} also ships a \code{galicia}, with three
+  columns (\code{x}, \code{y}, \code{lead}). Both packages are attached in the
+  week 7 and 8 tutorials, so load this one with
+  \code{data(galicia, package = "lsda")}.
+}
+
 \seealso{
 \code{\link{galicia_grid}} and \code{\link{galicia_pred}} for
   prediction.

@@ -31,6 +31,11 @@ data(package = "lsda")   # list everything
 ?galicia                 # variables, units and source for any one
 ```
 
+`RiskMap` ships datasets called `galicia`, `loaloa` and `liberia` too, with
+different contents, and weeks 7 and 8 attach both packages. Name the package
+when you load one — `data(galicia, package = "lsda")` — or whichever was
+attached last will win.
+
 | Dataset | Weeks | Description |
 |---|---|---|
 | `cattle` | 1–3 | Bodyweight of 60 cattle at 11 times. Balanced design. |
@@ -40,8 +45,11 @@ data(package = "lsda")   # list everything
 | `galicia` | 7–8 | Lead in moss at 132 Galician stations. |
 | `galicia_grid`, `galicia_pred` | 8 | Prediction grid and covariate surface. |
 | `loaloa` | 7 | Loa loa prevalence, 197 villages. |
-| `liberia`, `liberia_grid` | 8 | Malaria incidence and child growth. |
+| `liberia`, `liberia_grid` | — | Malaria incidence and child growth. Not the onchocerciasis data used in the week 8 challenge — that one is `RiskMap::liberia`. |
 | `scotland_lip` | 9–10 | Male lip cancer, 56 Scottish counties (`sf`). |
+| `gm_no2` | 7–8 | NO₂ at 25 Greater Manchester monitoring stations (`sf`). |
+| `gm_grid` | 8 | 4996-point prediction grid for Greater Manchester (`sf`). |
+| `nw_obesity` | 9–10 | Child obesity and IDACI, 33 NW England districts (`sf`). |
 | `tef` | — | Teacher effectiveness survey summaries. |
 
 ## Helper functions
@@ -71,10 +79,16 @@ run_app("gee_robustness")
 ## Notes
 
 - `scotland_lip` geometry is in metres, tagged `EPSG:27700`. The original
-  shapefile carried no CRS and coordinates in kilometres. If you pass a
-  distance-valued argument such as `spdep::poly2nb(snap = )`, scale it
-  accordingly — `snap = 200000`, not `200`, or Orkney, Shetland and the
-  Western Isles end up with no neighbours.
+  shapefile carried no CRS and coordinates in kilometres, so any
+  distance-valued argument has to be scaled — `spdep::dnearneigh(d2 = 50000)`
+  for 50 km, not `50`.
+- Orkney, Shetland and the Western Isles share no boundary with anything, so
+  `poly2nb()` correctly gives them no neighbours. Do **not** reach for a large
+  snapping tolerance to fix it: `snap = 200000` takes the mean number of
+  neighbours from 4.2 to 46.6 out of a possible 55 — very nearly a complete
+  graph — and Moran's I on the lip-cancer SIRs falls from 0.44 to 0.05. Either
+  keep the empty sets with `zero.policy = TRUE`, or join each island to its
+  nearest county.
 - `cattle$group`, `ichs$gender` and `ichs$vitA` are kept as numeric 0/1 rather
   than factors, so that existing course code comparing them to `0` and `1`
   keeps working.

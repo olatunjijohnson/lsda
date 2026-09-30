@@ -25,6 +25,12 @@ Cameroon and southern Nigeria, with elevation and NDVI vegetation covariates.
 A binomial response, so it extends the Gaussian geostatistics of weeks 7-8
 to the generalised case.
 }
+\section{Name clash}{
+ \pkg{RiskMap} also ships a \code{loaloa} --- the same
+  survey, but with upper-case column names. Load this one with
+  \code{data(loaloa, package = "lsda")}.
+}
+
 \references{
 Diggle, P.J., Thomson, M.C., Christensen, O.F., Rowlingson, B.,
   Obsomer, V., Gardon, J., Wanji, S., Takougang, I., Enyong, P., Kamgno, J.,

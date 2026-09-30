@@ -114,6 +114,10 @@
 #' }
 #' @seealso \code{\link{galicia_grid}} and \code{\link{galicia_pred}} for
 #'   prediction.
+#' @section Name clash: \pkg{RiskMap} also ships a \code{galicia}, with three
+#'   columns (\code{x}, \code{y}, \code{lead}). Both packages are attached in the
+#'   week 7 and 8 tutorials, so load this one with
+#'   \code{data(galicia, package = "lsda")}.
 "galicia"
 
 #' Prediction grid for Galicia
@@ -157,6 +161,9 @@
 #'   Obsomer, V., Gardon, J., Wanji, S., Takougang, I., Enyong, P., Kamgno, J.,
 #'   Remme, H., Boussinesq, M. and Molyneux, D.H. (2007). Spatial modelling and
 #'   prediction of Loa loa risk: decision making under uncertainty.
+#' @section Name clash: \pkg{RiskMap} also ships a \code{loaloa} --- the same
+#'   survey, but with upper-case column names. Load this one with
+#'   \code{data(loaloa, package = "lsda")}.
 "loaloa"
 
 #' Malaria incidence and child growth in Liberia
@@ -171,6 +178,9 @@
 #'   \item{longitude, latitude}{decimal degrees}
 #'   \item{malaria_incidence_rate}{incidence rate}
 #' }
+#' @section Name clash: \pkg{RiskMap} ships a different dataset also called
+#'   \code{liberia} (onchocerciasis counts, used in the week 8 challenge). Name
+#'   the package for whichever you want.
 "liberia"
 
 #' Prediction grid for Liberia
@@ -205,6 +215,68 @@
 #' data(scotland_lip)
 #' head(scotland_lip$sir)
 "scotland_lip"
+
+#' Nitrogen dioxide in Greater Manchester
+#'
+#' Nitrogen dioxide (NO2) measured at 25 monitoring stations across Greater
+#' Manchester, the running geostatistical example in weeks 7 and 8: the
+#' variogram of the residuals in week 7, and model fitting and prediction in
+#' week 8.
+#'
+#' @format An \code{sf} data frame with 25 features and 8 columns:
+#' \describe{
+#'   \item{station}{monitoring station name}
+#'   \item{NO2}{nitrogen dioxide concentration}
+#'   \item{PM10, PM25}{particulate matter concentrations}
+#'   \item{elevation}{elevation in metres}
+#'   \item{road}{distance to the nearest major road, in metres}
+#'   \item{pop}{population count of the surrounding cell}
+#'   \item{geometry}{station location, EPSG:27700}
+#' }
+#' @seealso \code{\link{gm_grid}} for the prediction grid.
+#' @examples
+#' data(gm_no2)
+#' summary(gm_no2$NO2)
+"gm_no2"
+
+#' Prediction grid for Greater Manchester
+#'
+#' A regular grid covering Greater Manchester, carrying the same covariates as
+#' \code{\link{gm_no2}}, for mapping predictions in week 8.
+#'
+#' @format An \code{sf} data frame with 4996 features and 4 columns:
+#' \describe{
+#'   \item{elevation}{elevation in metres}
+#'   \item{pop}{population count of the cell}
+#'   \item{road}{distance to the nearest major road, in metres}
+#'   \item{geometry}{grid point, EPSG:27700}
+#' }
+#' @examples
+#' data(gm_grid)
+#' nrow(gm_grid)
+"gm_grid"
+
+#' Childhood obesity and deprivation in North West England
+#'
+#' Childhood obesity and income deprivation for the 33 local authority
+#' districts of North West England, the areal example in weeks 9 and 10.
+#'
+#' @format An \code{sf} data frame with 33 features and 8 columns:
+#' \describe{
+#'   \item{lad_code, lad_name}{local authority district code and name}
+#'   \item{num_obese}{number of children measured as obese}
+#'   \item{total_sampled}{number of children measured}
+#'   \item{prop_obese}{\code{num_obese / total_sampled}}
+#'   \item{idaci_score}{Income Deprivation Affecting Children Index, average score}
+#'   \item{idaci_rank}{rank of the IDACI score (lower is more deprived)}
+#'   \item{geometry}{district polygon, EPSG:27700}
+#' }
+#' @source National Child Measurement Programme small-area data and the English
+#'   Indices of Deprivation 2019, both published by gov.uk.
+#' @examples
+#' data(nw_obesity)
+#' summary(nw_obesity$prop_obese)
+"nw_obesity"
 
 #' Teacher effectiveness survey summaries
 #'

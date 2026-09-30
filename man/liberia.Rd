@@ -20,4 +20,10 @@ liberia
 Cluster-level malaria incidence with height-for-age z-scores, used as the
 week 8 challenge dataset.
 }
+\section{Name clash}{
+ \pkg{RiskMap} ships a different dataset also called
+  \code{liberia} (onchocerciasis counts, used in the week 8 challenge). Name
+  the package for whichever you want.
+}
+
 \keyword{datasets}
