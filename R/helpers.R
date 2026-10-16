@@ -247,6 +247,14 @@ plot.lsda_variogram_mc <- function(x, ...) {
   invisible(x)
 }
 
+# What each app needs on top of shiny. Keep in step with inst/shiny/*/app.R.
+APP_REQUIRES <- list(
+  cov_explorer   = character(0),
+  gee_robustness = "geepack",
+  lmm_simulator  = "nlme",
+  variogram      = character(0)
+)
+
 #' Launch a course Shiny application
 #'
 #' @param app Application name. Omit to list what is available.
@@ -274,8 +282,19 @@ run_app <- function(app = NULL, ...) {
     stop("unknown app '", app, "'. Available: ",
          paste(available, collapse = ", "), call. = FALSE)
   }
-  if (!requireNamespace("shiny", quietly = TRUE)) {
-    stop("package 'shiny' is required to run the apps", call. = FALSE)
+  # The apps are in Suggests, so installing lsda does not bring their
+  # dependencies with it. Check them here and say what to install: without this
+  # gee_robustness fails inside the app with a bare "there is no package called
+  # 'geepack'", which does not tell the student what to do about it.
+  needed <- c("shiny", APP_REQUIRES[[app]])
+  absent <- needed[!vapply(needed, requireNamespace, logical(1), quietly = TRUE)]
+  if (length(absent)) {
+    stop("run_app(\"", app, "\") needs ",
+         paste(sprintf("'%s'", absent), collapse = " and "),
+         ", which ", if (length(absent) > 1) "are" else "is", " not installed.\n",
+         "  install.packages(c(",
+         paste(sprintf("\"%s\"", absent), collapse = ", "), "))",
+         call. = FALSE)
   }
   shiny::runApp(file.path(dir, app), ...)
 }
