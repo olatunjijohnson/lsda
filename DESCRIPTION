@@ -1,7 +1,7 @@
 Package: lsda
 Type: Package
 Title: Course Materials for Longitudinal and Spatial Data Analysis
-Version: 0.3.0
+Version: 0.3.1
 Authors@R: person(
     given = "Olatunji",
     family = "Johnson",
@@ -17,11 +17,11 @@ License: CC BY-NC-SA 4.0
 Encoding: UTF-8
 LazyData: true
 Depends:
-    R (>= 4.1)
+    R (>= 4.1),
+    SPmodels
 Imports:
     graphics,
     grDevices,
-    SPmodels,
     stats
 Suggests:
     geepack,
