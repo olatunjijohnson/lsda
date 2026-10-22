@@ -1,7 +1,7 @@
 Package: lsda
 Type: Package
 Title: Course Materials for Longitudinal and Spatial Data Analysis
-Version: 0.2.1
+Version: 0.3.0
 Authors@R: person(
     given = "Olatunji",
     family = "Johnson",
@@ -21,23 +21,19 @@ Depends:
 Imports:
     graphics,
     grDevices,
+    SPmodels,
     stats
 Suggests:
-    CARBayes,
     geepack,
-    ggplot2,
-    gstat,
     knitr,
     learnr,
-    MASS,
     nlme,
     rmarkdown,
     sf,
     shiny,
-    spatstat,
-    spdep,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.3.1
 URL: https://github.com/olatunjijohnson/lsda
 BugReports: https://github.com/olatunjijohnson/lsda/issues
+Additional_repositories: https://olatunjijohnson.r-universe.dev

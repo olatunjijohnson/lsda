@@ -178,10 +178,31 @@
 #'   \item{longitude, latitude}{decimal degrees}
 #'   \item{malaria_incidence_rate}{incidence rate}
 #' }
-#' @section Name clash: \pkg{RiskMap} ships a different dataset also called
-#'   \code{liberia} (onchocerciasis counts, used in the week 8 challenge). Name
-#'   the package for whichever you want.
+#' @seealso \code{\link{liberia_oncho}}, the river-blindness survey used in the
+#'   week 8 challenge, which is a different dataset despite the similar name.
 "liberia"
+
+#' River blindness in Liberia
+#'
+#' Reported onchocerciasis (river blindness) nodule counts from 90 villages
+#' sampled across Liberia, with village elevation. The week 8 challenge: a
+#' binomial geostatistical model, where the response is a count out of a total
+#' rather than a continuous measurement.
+#'
+#' @format A data frame with 90 rows and 6 columns:
+#' \describe{
+#'   \item{lat, long}{decimal degrees}
+#'   \item{ntest}{number of people tested for the presence of nodules}
+#'   \item{npos}{number testing positive}
+#'   \item{elevation}{village elevation in metres}
+#'   \item{log_elevation}{log of the elevation}
+#' }
+#' @source Redistributed from the \pkg{RiskMap} package by Emanuele Giorgi,
+#'   under its MIT licence, so that the exercise runs in the browser without
+#'   \pkg{RiskMap}, which cannot load under WebAssembly.
+#' @seealso \code{\link{liberia}} for the unrelated malaria and child-growth
+#'   dataset, and \code{\link{liberia_grid}} for a prediction grid.
+"liberia_oncho"
 
 #' Prediction grid for Liberia
 #'
